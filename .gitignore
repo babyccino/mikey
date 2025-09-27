@@ -23,7 +23,6 @@ pnpm-debug.log*
 # Git-specific files
 .git/
 .gitconfig
-.gitignore
 
 # Other editor/IDE settings
 .idea/
@@ -33,3 +32,5 @@ pnpm-debug.log*
 *.swp
 *.tmp
 Thumbs.db
+
+.astro

@@ -10,6 +10,12 @@ const postsCollection = defineCollection({
         url: image(),
         alt: z.string(),
       }),
+      document: z
+        .object({
+          url: image(),
+          title: z.string(),
+        })
+        .optional(),
       tags: z.array(z.string()),
     }),
 });
