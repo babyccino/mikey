@@ -12,12 +12,18 @@ export async function getStaticPaths() {
   return uniqueTags.map((tag) => {
     // Filter posts by tag
     const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag)
+      post.data.tags.includes(tag),
     );
     // Sort filtered posts by date in descending order
-    const sortedPosts = filteredPosts.sort(
-      (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
-    );
+    const sortedPosts = filteredPosts.sort((a, b) => {
+      if (b.data.pubDate != undefined && a.data.pubDate != undefined) {
+        return (
+          new Date(b.data.pubDate).getTime() -
+          new Date(a.data.pubDate).getTime()
+        );
+      }
+      return a.data.pubDate != undefined ? -1 : 1;
+    });
 
     return {
       params: { tag },
@@ -46,8 +52,7 @@ const { posts } = Astro.props;
               title={post.data.title}
               description={post.data.description}
               alt={post.data.title}
-              pubDate={post.data.pubDate.toString().slice(0, 10)}
-              author={post.data.author}
+              pubDate={post.data.pubDate?.toString().slice(0, 10)}
               image={post.data.image.url}
               tags={post.data.tags}
             />
