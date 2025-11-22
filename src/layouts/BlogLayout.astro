@@ -46,15 +46,13 @@ const { frontmatter } = Astro.props;
       </div>
 
       {
-        frontmatter.document ? (
-          <div class="mt-6 w-full flex flex-col items-center">
-            <a
-              href={frontmatter.document.url}
-              download
-              class="font-bold underline"
-            >
-              {frontmatter.document.title}
-            </a>
+        frontmatter.documents ? (
+          <div class="mt-6 w-full flex items-center justify-center gap-2">
+            {frontmatter.documents.map((document) => (
+              <a href={document.url} download class="font-bold underline">
+                {document.title}
+              </a>
+            ))}
           </div>
         ) : null
       }

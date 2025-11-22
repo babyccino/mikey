@@ -42,21 +42,24 @@
           ],
           "additionalProperties": false
         },
-        "document": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string"
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
             },
-            "title": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "url",
-            "title"
-          ],
-          "additionalProperties": false
+            "required": [
+              "url",
+              "title"
+            ],
+            "additionalProperties": false
+          }
         },
         "tags": {
           "type": "array",
