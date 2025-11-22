@@ -17,9 +17,13 @@ const { title, url, description, pubDate, image } = Astro.props;
   </a>
 
   <div class="mt-1">
-    <div class="flex items-center space-x-1 text-xs text-base-500">
-      <time datetime={pubDate}>{pubDate}</time>
-    </div>
+    {
+      pubDate && (
+        <div class="flex items-center space-x-1 text-xs text-base-500">
+          <time datetime={pubDate}>{pubDate}</time>
+        </div>
+      )
+    }
 
     <h3 class="mt-4 text-base text-base-900 text-balance">
       <a href={url} class="hover:underline">{title}</a>

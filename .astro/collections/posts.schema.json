@@ -73,7 +73,6 @@
       },
       "required": [
         "title",
-        "pubDate",
         "description",
         "image",
         "tags"
