@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 const { frontmatter } = Astro.props;
 ---
@@ -25,12 +26,17 @@ const { frontmatter } = Astro.props;
           alt={frontmatter.image.alt}
           class="object-cover object-center w-full aspect-12/7 rounded-xl mt-4"
         />
-        <div class="flex flex-col justify-between mt-4 md:flex-row">
+        <div class="flex flex-col justify-center mt-4 md:flex-row gap-2">
           {
             frontmatter.pubDate && (
               <p class="text-xs text-zinc-500">
                 {frontmatter.pubDate.toString().slice(4, 15)}
               </p>
+            )
+          }
+          {
+            frontmatter.pubDate && frontmatter.tags.length > 0 && (
+              <hr class="hidden md:block w-0 h-4 border-[0.5px] border-base-500" />
             )
           }
           <div class="flex gap-3">
@@ -54,6 +60,7 @@ const { frontmatter } = Astro.props;
           <div class="mt-6 w-full flex items-center justify-center gap-2">
             {frontmatter.documents.map((document) => (
               <a href={document.url} download class="font-bold underline">
+                <Icon class="inline-block mr-1" name="lucide:download" />
                 {document.title}
               </a>
             ))}
