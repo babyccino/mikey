@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogEntries from "@/components/entries/BlogEntry.astro";
 import { getCollection } from "astro:content";
+import { sort } from "@/utils/posts";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -15,15 +16,7 @@ export async function getStaticPaths() {
       post.data.tags.includes(tag),
     );
     // Sort filtered posts by date in descending order
-    const sortedPosts = filteredPosts.sort((a, b) => {
-      if (b.data.pubDate != undefined && a.data.pubDate != undefined) {
-        return (
-          new Date(b.data.pubDate).getTime() -
-          new Date(a.data.pubDate).getTime()
-        );
-      }
-      return a.data.pubDate != undefined ? -1 : 1;
-    });
+    const sortedPosts = filteredPosts.sort(sort);
 
     return {
       params: { tag },

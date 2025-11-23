@@ -2,19 +2,13 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogEntry from "@/components/entries/BlogEntry.astro";
 import Cta from "@/components/global/Cta.astro";
+import { sort } from "@/utils/posts";
 
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("posts");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 
-const sortedPosts = allPosts.sort((a, b) => {
-  if (b.data.pubDate != undefined && a.data.pubDate != undefined) {
-    return (
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-    );
-  }
-  return a.data.pubDate != undefined ? -1 : 1;
-});
+const sortedPosts = allPosts.sort(sort);
 ---
 
 <BaseLayout>
